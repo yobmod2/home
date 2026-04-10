@@ -1,0 +1,84 @@
+[project]
+name = "home"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14.2"
+dependencies = [
+    "more-itertools>=11.0.1",
+    "msgspec>=0.21.0",
+    "niquests>=3.18.4",
+    "numpy>=2.4.4",
+    "opencv-contrib-python>=4.13.0.92",
+    "pillow>=12.2.0",
+    "pydantic>=2.12.5",
+    "python-utils>=3.9.1",
+    "rich>=14.3.3",
+    "scikit-image>=0.26.0",
+    "tomlkit>=0.14.0",
+    "toolz>=1.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.20.0",
+    "ruff>=0.15.9",
+    "ty>=0.0.29",
+]
+
+[tool.mypy]
+mypy_path = "./.venv/bin/mypy"
+python_version = "3.14"
+strict = true
+warn_no_return = true
+warn_return_any = true
+warn_unreachable = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_untyped_calls = true
+
+[tool.ty]    # Ty typechecker (rules) and languageserver (analysis) config
+environment = {python-version = "3.14"}
+rules = {all = "error"}
+analysis = {respect-type-ignore-comments = true}
+
+
+[tool.ruff]  # Ruff formatter config
+line-length = 120
+extend-ignore = ["F401"]  # imported but not used (-> don't fix but warns)
+
+
+[tool.ruff.lint]  # Ruff linter config
+select = [
+    "E",    # pycodestyle
+    "W",    # pycodestyle warnings 
+    "I",    # isort
+    "UP",   # pyupgrade
+    "C90",  # McCabe
+    "N",    # pep8-naming
+    "PERF", # perflint
+
+    "F",   # Pyflakes
+    "A",   # flake8-builtins  
+    "B",   # flake8-bugbear
+    "BLE", # flake8-blind-except
+    "C4",  # flake8-comprehensions
+    "FA",  # flake8-future-annotations    
+    "PTH", # flake8-use-pathlib
+    "SIM", # flake8-simplify
+    "TC",  # flake8-type-checking
+
+    "LOG", # Checks for issues using the standard library logging module.
+    "G",   # Better usage of built-in logging
+    "PYI", # Linting rules for type annotations.
+    "Q",   # Linting rules for quotes
+    "RUF", # Ruff lint shows problems Ruff will fix
+]
+
+ignore = [
+    "G004",  # Logging statement uses f-string
+    "TC006", # quote typehints in cast()
+]
+pycodestyle = {max-line-length = 120}
